@@ -1,0 +1,53 @@
+.main-frame {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 15px grey solid;
+    border-radius: 20px;
+    padding: 20px;
+
+}
+
+.movie-frame {
+    display: flex;
+}
+
+.add-stats {
+    display: flex;
+    justify-content: space-between;
+    min-width: 100px;
+
+}
+
+.stats {
+    /*padding-right: 20px;*/
+    margin-right: 20px;
+    min-width: 100px;
+
+}
+
+.stats-emh {
+    font-weight: bold;
+}
+
+.movie-title {
+    font-size: 2em;
+    margin-bottom: 0;
+    margin-top: -10px;
+    font-weight: bold;
+}
+
+.movies-stats {
+
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.div-img {
+    margin-right: 20px;
+}
+

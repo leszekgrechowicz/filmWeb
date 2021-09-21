@@ -1,0 +1,39 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+html {
+    max-width: 1000px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+
+}
+
+.link_div {
+    align-content: center;
+    margin-left: 80px;
+    padding-top: 7px;
+}
+
+
+.link {
+    min-width: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: 2px #609ab6 solid;
+    background: #609ab6;
+    padding: 7px;
+    border-radius: 10px;
+    /*opacity: 0.8;*/
+    transition: 0.5s;
+
+}
+
+.link:hover {
+    opacity: 1;
+    cursor: pointer;
+    color: #609ab6;
+    background: white;
+}
+

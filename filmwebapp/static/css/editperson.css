@@ -1,0 +1,26 @@
+.form {
+    margin: auto;
+    max-width: 700px;
+}
+
+.main-form {
+    display: flex;
+    margin-top: 20px;
+}
+
+.person-data {
+    font-size: 1.1em;
+}
+
+
+.form p {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+
+.input-bttn {
+    margin-top: 5px;
+    padding: 5px 10px;
+
+}
