@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/persons.css' %}">
+
+{% endblock head %}
+
+{% block content %}
+
+<table class="table_person">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <!--                <th>Last Name</th>-->
+    </tr>
+    </thead>
+    {% for person in persons %}
+    <tbody>
+    <tr>
+        <td>
+            <div class="tooltip"><a href="{% url 'edit-person' pk=person.id %}">{{ person.first_name }}</a>
+                <span class="tooltiptext">Edit !</span></div>
+        </td>
+        <td>
+            <div class="tooltip"><a href="{% url 'edit-person' pk=person.id %}">{{ person.last_name }}</a>
+                <span class="tooltiptext">Edit !</span></div>
+        </td>
+
+    </tr>
+
+    </tbody>
+    {% endfor %}
+</table>
+
+<div class="link_div link_div2">
+    <a class="link" href="{% url 'add-person' %}">Add Person</a>
+</div>
+
+{% endblock content %}

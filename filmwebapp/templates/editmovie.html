@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css">
+<link rel="stylesheet" href="{% static 'css/editperson.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input class="input-bttn" type="submit" value="Confirm">
+
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

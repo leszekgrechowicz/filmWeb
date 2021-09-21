@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet">
+    {% block head %}
+
+    {% endblock head %}
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<header>
+    <div class="nav-bar">
+        <p class="logo">film<span class="span-logo1">Web</span><span class="span-logo2">-{{ title }}</span></p>
+        <div class="nav-links">
+            <a href="{% url 'movies' %}">Show Movies</a>
+            <a href="{% url 'persons' %}">Show Persons</a>
+            <a href="{% url 'add-person' %}">Add Person</a>
+            <a href="{% url 'add-movie' %}">Add&nbspMovie</a>
+        </div>
+    </div>
+</header>
+<body>
+{% block content %}
+{% endblock content %}
+</body>
+</html>
