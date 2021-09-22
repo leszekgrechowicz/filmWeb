@@ -1,0 +1,72 @@
+[
+  {
+    "model": "filmwebapp.genre",
+    "pk": 1,
+    "fields": {
+      "name": 0
+    }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 2,
+    "fields": {
+      "name": 1
+    }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 3,
+    "fields": {
+      "name": 2
+    }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 4,
+    "fields": {
+      "name": 3
+    }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 5,
+    "fields": {
+      "name": 4
+    }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 6,
+    "fields": {
+      "name": 5
+          }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 7,
+    "fields": {
+      "name": 6
+          }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 8,
+    "fields": {
+      "name": 7
+          }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 9,
+    "fields": {
+      "name": 8
+          }
+  },
+  {
+    "model": "filmwebapp.genre",
+    "pk": 10,
+    "fields": {
+      "name": 9
+          }
+  }
+]

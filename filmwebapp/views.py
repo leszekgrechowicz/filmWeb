@@ -83,18 +83,25 @@ class AddMovieView(TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
-        form = EditForm(request.POST)
+        form = MovieForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             director = form.cleaned_data['director']
             screenplay = form.cleaned_data['screenplay']
-            starring = form.cleaned_data['staring']
+            starring = form.cleaned_data['starring']
+            starring2 = form.cleaned_data['starring2']
             year = form.cleaned_data['production_year']
-            rating = form.cleaned_data['form']
+            rating = form.cleaned_data['rating']
             genre = form.cleaned_data['genre']
-            print(title, screenplay, starring)
 
-            Movie.objects.create(title=title, director=director, screenplay=screenplay, starring=starring,
-                                 year=year, rating=rating, genre=genre)
+            genre = Genre.objects.get(name=int(genre))
 
+            new_movie = Movie.objects.create(title=title, director=director, screenplay=screenplay,
+                                             year=year, rating=rating)
+            new_movie.starring.set([starring, starring2])
+            new_movie.genres.set([genre, ])
             return redirect(show_movies)
+
+
+
+

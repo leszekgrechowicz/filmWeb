@@ -16,16 +16,16 @@ class Genre(models.Model):
     MIN = -1
     MAX = 8
     GENRE_CHOICES = (
-        (-1, 'Not defined'),
-        (0, 'Action'),
-        (1, 'Thriller'),
-        (2, 'Science Fiction'),
-        (3, 'Fantasy'),
-        (4, 'Comedy'),
-        (5, 'Romantic'),
-        (6, 'Western'),
-        (7, 'Crime'),
-        (8, 'Drama')
+        (0, 'Not defined'),
+        (1, 'Action'),
+        (2, 'Thriller'),
+        (3, 'Science Fiction'),
+        (4, 'Fantasy'),
+        (5, 'Comedy'),
+        (6, 'Romantic'),
+        (7, 'Western'),
+        (8, 'Crime'),
+        (9, 'Drama')
     )
     name = models.IntegerField(choices=GENRE_CHOICES, default=-1,
                                validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
@@ -54,4 +54,6 @@ class PersonMovie(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     role = models.CharField(max_length=128)
+
+
 

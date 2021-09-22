@@ -14,8 +14,16 @@ class MovieForm(forms.Form):
     director = forms.ModelChoiceField(queryset=Person.objects.all())
     screenplay = forms.ModelChoiceField(queryset=Person.objects.all())
     starring = forms.ModelChoiceField(queryset=Person.objects.all())
+    starring2 = forms.ModelChoiceField(queryset=Person.objects.all())
+    # starring3 = forms.ModelChoiceField(queryset=Person.objects.all())
 
     production_year = forms.IntegerField()
     rating = forms.DecimalField(max_digits=2, decimal_places=1,
                                 validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
     genre = forms.ChoiceField(choices=Genre.GENRE_CHOICES)
+
+    # genre1 = forms.ChoiceField(choices=Genre.GENRE_CHOICES)
+    # genre3 = forms.ChoiceField(choices=Genre.GENRE_CHOICES)
+
+
+

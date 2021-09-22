@@ -21,7 +21,7 @@ from filmwebapp.views import show_movies, movie_details, show_persons, \
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('movies/', show_movies, name='movies'),
+    path('', show_movies, name='movies'),
     path('movie-details/<int:pk>', movie_details, name='movie'),
     path('persons/', show_persons, name='persons'),
     path('edit-person/<int:pk>', EditPersonView.as_view(), name='edit-person'),
