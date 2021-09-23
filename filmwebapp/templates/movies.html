@@ -9,68 +9,73 @@
 
 {% for movie in movies %}
 <div></div>
-    <div class="main-frame">
-        <div class="movie-frame">
+<div class="main-frame">
+    <div class="movie-frame">
 
-            {% load static %}
+        {% load static %}
 
-            <div class="div-img">
-                <img src="{% static '/images/ImageNotAvailable.jpg' %}" alt="Film Cover" width="150">
-            </div>
-
-            <div class="movies-stats">
-                <p class="movie-title">Title: {{ movie.title }}</p>
-                <p>Production year: <span class="bold">{{ movie.year }}</span></p>
-                <p>Director: <span class="bold">{{movie.director.first_name }} {{ movie.director.last_name }}</span></p>
-                <p>Imdb rating: <span class="bold">{{ movie.rating }}</span></p>
-
-            </div>
+        <div class="div-img">
+            <img src="{% static '/images/ImageNotAvailable.jpg' %}" alt="Film Cover" width="150">
         </div>
 
-        {% if link %}
+        <div class="movies-stats">
+            <p class="movie-title">Title: {{ movie.title }}</p>
+            <p>Production year: <span class="bold">{{ movie.year }}</span></p>
+            <p>Director: <span class="bold">{{movie.director.first_name }} {{ movie.director.last_name }}</span></p>
+            <p>Imdb rating: <span class="bold">{{ movie.rating }}</span></p>
 
-        <div class="link_div">
+        </div>
+    </div>
+
+    {% if link %}
+
+    <div class="navs-links">
+        <div class="link_div mar-links">
             <a class="link" href="{% url 'movie' pk=movie.id %}">More&nbspdetails</a>
         </div>
 
-        {% else %}
-
-        <div class="add-stats">
-            <div class="stats">
-                <p class="stats-emh">Screenplay:</p>
-                <p>{{ movie.screenplay }}</p>
-
-            </div>
-
-            <div class="stats">
-                <p class="stats-emh">Stars:</p>
-
-                {% for star in movie.starring.all %}
-
-                <p>{{ star.first_name }} {{ star.last_name }}</p>
-
-                {% endfor %}
-
-            </div>
-
-            <div class="stats">
-                <p class="stats-emh">Genre:</p>
-
-                {% for genre in movie.genres.all %}
-
-                <p>{{ genre.get_name_display }}</p>
-
-                {% endfor %}
-
-            </div>
+        <div class="link_div mar-links">
+            <a class="link" href="{% url 'edit-movie' pk=movie.id %}">Edit&nbspMovie</a>
         </div>
-
-        {% endif %}
-
     </div>
 
-    {% endfor %}
+    {% else %}
 
+    <div class="add-stats">
+        <div class="stats">
+            <p class="stats-emh">Screenplay:</p>
+            <p>{{ movie.screenplay }}</p>
+
+        </div>
+
+        <div class="stats">
+            <p class="stats-emh">Stars:</p>
+
+            {% for star in movie.starring.all %}
+
+            <p>{{ star.first_name }}&nbsp{{ star.last_name }}</p>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="stats">
+            <p class="stats-emh">Genre:</p>
+
+            {% for genre in movie.genres.all %}
+
+            <p>{{ genre.get_name_display }}</p>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endfor %}
 
 
 {% endblock content %}

@@ -42,8 +42,8 @@ class Movie(models.Model):
     screenplay = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="screenplay+")
     starring = models.ManyToManyField(Person, through="PersonMovie")
     year = models.IntegerField()
-    rating = models.DecimalField(max_digits=2, decimal_places=1,
-                                 validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
+    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    # validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):

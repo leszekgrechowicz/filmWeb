@@ -15,20 +15,6 @@
             <input class="input-bttn" type="submit" value="Confirm">
 
         </form>
-        {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="row">
-                    {{ error|escape }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="row">
-                {{ error|escape }}
-            </div>
-        {% endfor %}
-    {% endif %}
     </div>
 </div>
 

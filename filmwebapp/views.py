@@ -65,7 +65,7 @@ class AddPersonView(TemplateView):
         return render(request, self.template_name, {'form': form, 'title': self.title})
 
     def post(self, request):
-        form = EditForm(request.POST)
+        form = EditForm(request.POST or None)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -74,7 +74,7 @@ class AddPersonView(TemplateView):
 
 
 class AddMovieView(TemplateView):
-    template_name = 'editmovie.html'
+    template_name = 'addmovie.html'
     title = 'Add Movie'
 
     def get(self, request):
@@ -83,7 +83,7 @@ class AddMovieView(TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
-        form = MovieForm(request.POST)
+        form = MovieForm(request.POST or None)
         if form.is_valid():
             title = form.cleaned_data['title']
             director = form.cleaned_data['director']
@@ -103,5 +103,56 @@ class AddMovieView(TemplateView):
             return redirect(show_movies)
 
 
+class EditMovieView(TemplateView):
+    template_name = 'editmovie.html'
+    title = 'Edit Movie'
 
+    def get(self, request, pk):
+        movie = Movie.objects.get(id=pk)
+        stars = list(movie.starring.all())
+        genre = list(movie.genres.all())
+
+        stars1 = None
+        stars2 = None
+        if stars:
+            stars1 = stars[0]
+        if len(stars) >= 2:
+            stars2 = stars[1]
+
+        pre_data = {'title': movie.title,
+                    'director': movie.director,
+                    'screenplay': movie.screenplay,
+                    'starring': stars1,
+                    'starring2': stars2,
+                    'production_year': movie.year,
+                    'rating': movie.rating,
+                    'genre': genre[0],
+                    }
+        form = MovieForm(initial=pre_data)
+        args = {'title': self.title, 'form': form}
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        form = MovieForm(request.POST or None)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            director = form.cleaned_data['director']
+            screenplay = form.cleaned_data['screenplay']
+            starring = form.cleaned_data['starring']
+            starring2 = form.cleaned_data['starring2']
+            year = form.cleaned_data['production_year']
+            rating = form.cleaned_data['rating']
+            genre = form.cleaned_data['genre']
+
+            Movie.objects.filter(id=pk).update(title=title, director=director, screenplay=screenplay,
+                                               year=year, rating=rating)
+
+            movie_to_edit = Movie.objects.get(id=pk)
+            print(movie_to_edit)
+            movie_to_edit.starring.set([starring, starring2])
+            movie_to_edit.genres.set([genre, ])
+            return redirect(show_movies)
+
+        else:
+            MovieForm()
 

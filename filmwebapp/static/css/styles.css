@@ -1,7 +1,7 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
-html {
-    max-width: 1000px;
+body {
+    max-width: 1150px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
     color: #333;

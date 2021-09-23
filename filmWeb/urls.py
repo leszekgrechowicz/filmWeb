@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from filmwebapp.views import show_movies, movie_details, show_persons, \
-    EditPersonView, AddPersonView, AddMovieView
+    EditPersonView, AddPersonView, AddMovieView, EditMovieView
 
 
 urlpatterns = [
@@ -27,5 +27,6 @@ urlpatterns = [
     path('edit-person/<int:pk>', EditPersonView.as_view(), name='edit-person'),
     path('add-person/', AddPersonView.as_view(), name='add-person'),
     path('add-movie/', AddMovieView.as_view(), name='add-movie'),
+    path('edit-movie/<int:pk>', EditMovieView.as_view(), name='edit-movie'),
 
 ]
