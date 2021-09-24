@@ -1,9 +1,9 @@
 .table_person {
     border-collapse: collapse;
-    width: 80%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 .table_person td, .table_person th {

@@ -20,7 +20,12 @@
 
 
 .input-bttn {
-    margin-top: 5px;
-    padding: 5px 10px;
+    margin-top: 20px;
+    padding: 5px 30px;
+    float: right;
 
+}
+
+.mar-top {
+    margin-top: 45px;
 }

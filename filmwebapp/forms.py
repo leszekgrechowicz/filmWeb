@@ -5,13 +5,21 @@ from datetime import datetime
 
 
 class EditForm(forms.Form):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    ATTRS = {
+        'class': 'form-control mt-1',
+
+    }
+
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs=ATTRS))
+
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs=ATTRS))
 
 
 class MovieForm(forms.Form):
     ATTRS = {
-        'class': 'form-control mt-10',
+        'class': 'form-control mt-1',
 
     }
     todays_date = datetime.now()
