@@ -16,16 +16,16 @@ class Genre(models.Model):
     MIN = -1
     MAX = 8
     GENRE_CHOICES = (
-        (0, 'Not defined'),
-        (1, 'Action'),
-        (2, 'Thriller'),
-        (3, 'Science Fiction'),
-        (4, 'Fantasy'),
-        (5, 'Comedy'),
-        (6, 'Romantic'),
-        (7, 'Western'),
-        (8, 'Crime'),
-        (9, 'Drama')
+        (1, 'Not defined'),
+        (2, 'Action'),
+        (3, 'Thriller'),
+        (4, 'Science Fiction'),
+        (5, 'Fantasy'),
+        (6, 'Comedy'),
+        (7, 'Romantic'),
+        (8, 'Western'),
+        (9, 'Crime'),
+        (10, 'Drama')
     )
     name = models.IntegerField(choices=GENRE_CHOICES, default=-1,
                                validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
@@ -43,7 +43,6 @@ class Movie(models.Model):
     starring = models.ManyToManyField(Person, through="PersonMovie")
     year = models.IntegerField()
     rating = models.DecimalField(max_digits=2, decimal_places=1)
-    # validators=[MinValueValidator(MIN), MaxValueValidator(MAX)])
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):

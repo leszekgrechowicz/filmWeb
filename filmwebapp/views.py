@@ -116,7 +116,7 @@ class EditMovieView(TemplateView):
         stars2 = None
         if stars:
             stars1 = stars[0]
-        if len(stars) >= 2:
+        if len(stars) > 1:
             stars2 = stars[1]
 
         pre_data = {'title': movie.title,
@@ -146,9 +146,8 @@ class EditMovieView(TemplateView):
 
             Movie.objects.filter(id=pk).update(title=title, director=director, screenplay=screenplay,
                                                year=year, rating=rating)
-
+            print(genre)
             movie_to_edit = Movie.objects.get(id=pk)
-            print(movie_to_edit)
             movie_to_edit.starring.set([starring, starring2])
             movie_to_edit.genres.set([genre, ])
             return redirect(show_movies)
