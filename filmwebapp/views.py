@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from filmwebapp.models import Movie, Person, Genre
 from django.views.generic import TemplateView
-from filmwebapp.forms import EditForm, MovieForm
+from filmwebapp.forms import EditForm, MovieForm, EditMovieForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -22,8 +22,8 @@ def movie_details(request, pk):
     """Queries movie details"""
     title = "Movie Details"
     movie = Movie.objects.get(id=pk)
-    movie.starring.all()
-    movie.genres.all()
+    # movie.starring.all()
+    # movie.genres.all()
     return render(request, 'movies.html', {'title': title, 'movies': [movie, ]})
 
 
@@ -130,13 +130,14 @@ class EditMovieView(TemplateView):
                     'production_year': movie.year,
                     'rating': movie.rating,
                     'genre': genre[0],
+                    'hidden': 0,
                     }
-        form = MovieForm(initial=pre_data)
+        form = EditMovieForm(initial=pre_data)
         args = {'title': self.title, 'form': form}
         return render(request, self.template_name, args)
 
     def post(self, request, pk):
-        form = MovieForm(request.POST or None)
+        form = EditMovieForm(request.POST or None)
         if form.is_valid():
             title = form.cleaned_data['title']
             director = form.cleaned_data['director']
