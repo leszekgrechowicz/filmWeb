@@ -1,16 +1,18 @@
 .main-frame {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
-    margin-bottom: 30px;
     border: 15px grey solid;
     border-radius: 20px;
     padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+
 
 }
 
 .movie-frame {
     display: flex;
+
 }
 
 .add-stats {

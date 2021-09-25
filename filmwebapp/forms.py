@@ -51,6 +51,8 @@ class MovieForm(forms.Form):
     genre = forms.ChoiceField(choices=Genre.GENRE_CHOICES, widget=forms.Select(
         attrs=ATTRS))
 
+    hidden = forms.HiddenInput(ini)
+
     def clean_title(self, *args, **kwargs):
         title = self.cleaned_data.get("title")
         try:
