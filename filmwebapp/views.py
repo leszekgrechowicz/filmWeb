@@ -102,6 +102,9 @@ class AddMovieView(TemplateView):
             new_movie.genres.set([genre, ])
             return redirect(show_movies)
 
+        else:
+            return render(request, 'addmovie.html', {'form': form})
+
 
 class EditMovieView(TemplateView):
     template_name = 'editmovie.html'
@@ -152,6 +155,5 @@ class EditMovieView(TemplateView):
             movie_to_edit.genres.set([genre, ])
             return redirect(show_movies)
 
-        else:
-            MovieForm()
+
 
