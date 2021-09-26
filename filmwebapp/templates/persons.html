@@ -13,10 +13,8 @@
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <!--                <th>Last Name</th>-->
-    </tr>
-    </thead>
-    {% for person in persons %}
+        <th id="last-th"></th>
+        {% for person in persons %}
     <tbody>
     <tr>
         <td>
@@ -24,8 +22,14 @@
                 <span class="tooltiptext">Edit !</span></div>
         </td>
         <td>
+
             <div class="tooltip"><a href="{% url 'edit-person' pk=person.id %}">{{ person.last_name }}</a>
                 <span class="tooltiptext">Edit !</span></div>
+
+
+        </td>
+        <td id="last_td" style="width: 40px; border-color: white">
+            <a id="del-bttn-p" href="">Delete</a>
         </td>
 
     </tr>

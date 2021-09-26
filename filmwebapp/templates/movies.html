@@ -8,7 +8,7 @@
 {% block content %}
 
 {% for movie in movies %}
-<div></div>
+
 <div class="main-frame">
     <div class="movie-frame">
 
@@ -19,7 +19,10 @@
         </div>
 
         <div class="movies-stats">
-            <p class="movie-title">Title: {{ movie.title }}</p>
+            <div class="first_row">
+                <p class="movie-title">Title: {{ movie.title }} </p>
+                <a class="del-bttn" href="{% url 'edit-movie' pk=movie.id %}">Delete</a>
+            </div>
             <p>Production year: <span class="bold">{{ movie.year }}</span></p>
             <p>Director: <span class="bold">{{movie.director.first_name }} {{ movie.director.last_name }}</span></p>
             <p>Imdb rating: <span class="bold">{{ movie.rating }}</span></p>
@@ -37,6 +40,7 @@
         <div class="link_div mar-links">
             <a class="link" href="{% url 'edit-movie' pk=movie.id %}">Edit&nbspMovie</a>
         </div>
+
     </div>
 
     {% else %}
