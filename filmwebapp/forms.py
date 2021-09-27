@@ -55,7 +55,7 @@ class MovieForm(forms.Form):
         title = self.cleaned_data.get("title")
 
         try:
-            exist = Movie.objects.get(title=title)
+            Movie.objects.get(title=title)
 
         except ObjectDoesNotExist:
             return title

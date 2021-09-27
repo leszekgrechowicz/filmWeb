@@ -29,3 +29,7 @@
 .mar-top {
     margin-top: 45px;
 }
+
+.errorlist {
+    display: none;
+}
