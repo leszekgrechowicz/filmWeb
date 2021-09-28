@@ -63,3 +63,12 @@ body {
 .div_del_bttn {
     margin-top: 65px;
 }
+
+.alert {
+    margin: 30px auto 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    max-width: 900px;
+
+}

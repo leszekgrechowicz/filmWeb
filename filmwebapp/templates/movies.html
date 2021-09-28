@@ -5,7 +5,17 @@
 <link rel="stylesheet" href="{% static 'css/movies.css' %}">
 {% endblock head %}
 
+
 {% block content %}
+{% if messages %}
+<div class="alert alert-success ">
+    {% for message in messages %}
+    <p>{{ message }}</p><br>
+    {% endfor %}
+
+</div>
+{% endif %}
+
 
 {% for movie in movies %}
 
@@ -21,7 +31,7 @@
         <div class="movies-stats">
             <div class="first_row">
                 <p class="movie-title">Title: {{ movie.title }} </p>
-                <a class="del-bttn" href="{% url 'edit-movie' pk=movie.id %}">Delete</a>
+                <a class="del-bttn" href="{% url 'del-movie' pk=movie.id %}">Delete</a>
             </div>
             <p>Production year: <span class="bold">{{ movie.year }}</span></p>
             <p>Director: <span class="bold">{{movie.director.first_name }} {{ movie.director.last_name }}</span></p>

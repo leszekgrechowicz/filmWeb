@@ -15,6 +15,9 @@ def show_movies(request):
     title = "Movies"
     movies = Movie.objects.all().order_by('-year')
     link = True
+    if not movies:
+        messages.info(request, 'Database is empty, please create some movies.')
+
     return render(request, 'movies.html', {'link': link, 'title': title, 'movies': movies})
 
 
@@ -30,6 +33,8 @@ def movie_details(request, pk):
 def show_persons(request):
     title = "Persons"
     persons = Person.objects.all()
+    if not persons:
+        messages.info(request, 'Database is empty, please create some persons.')
     return render(request, 'persons.html', {'title': title, 'persons': persons})
 
 
@@ -159,3 +164,20 @@ class EditMovieView(TemplateView):
         else:
             return render(request, 'editmovie.html', {'title': self.title, 'form': form})
 
+
+class DeletePerson(TemplateView):
+
+    def get(self, request, pk):
+        object_to_delate = Person.objects.get(id=pk)
+        object_to_delate.delete()
+        messages.success(request, f'Person {object_to_delate.first_name} {object_to_delate.last_name} has been deleted.')
+        return redirect(show_persons)
+
+
+class DeleteMovie(TemplateView):
+
+    def get(self, request, pk):
+        object_to_delate = Movie.objects.get(id=pk)
+        object_to_delate.delete()
+        messages.success(request, f'Movie {object_to_delate.title} has been deleted.')
+        return redirect(show_movies)
