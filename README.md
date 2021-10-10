@@ -1,4 +1,4 @@
-# filmWeb
+# film_Web
 Simple web service with DataBase using Django
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/leszekgrechowicz/filmWeb)
@@ -6,7 +6,7 @@ Simple web service with DataBase using Django
 
 ## Preparation:
 
-python Installation is required !
+Python Installation is required !
 
 - Crate new folder and new working environment using python/pip.
 - Install requirements.txt using pip.

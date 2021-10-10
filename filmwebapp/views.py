@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from filmwebapp.models import Movie, Person, Genre
 from django.views.generic import TemplateView
 from filmwebapp.forms import EditForm, MovieForm, EditMovieForm
@@ -25,8 +24,7 @@ def movie_details(request, pk):
     """Queries movie details"""
     title = "Movie Details"
     movie = Movie.objects.get(id=pk)
-    # movie.starring.all()
-    # movie.genres.all()
+
     return render(request, 'movies.html', {'title': title, 'movies': [movie, ]})
 
 
@@ -39,14 +37,15 @@ def show_persons(request):
 
 
 class EditPersonView(TemplateView):
-    template_name = 'editperson.html'
+    """Edits person details"""
+    # template_name = 'editperson.html'
     title = 'Edit Person'
 
     def get(self, request, pk):
         person_to_edit = Person.objects.get(id=pk)
         form = EditForm()
         args = {'title': self.title, 'person': person_to_edit, 'form': form}
-        return render(request, self.template_name, args)
+        return render(request, 'editperson.html', args)
 
     def post(self, request, pk):
         form = EditForm(request.POST)
@@ -57,11 +56,12 @@ class EditPersonView(TemplateView):
             person_to_edit.first_name = first_name
             person_to_edit.last_name = last_name
             person_to_edit.save()
-            # messages.success(request, 'Persons details updated.')
+            messages.success(request, 'Person details updated.')
             return redirect(show_persons)
 
 
 class AddPersonView(TemplateView):
+    """Adds person to the database"""
     template_name = 'addperson.html'
     title = 'Add Person'
 
@@ -75,10 +75,13 @@ class AddPersonView(TemplateView):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             person_to_add = Person.objects.create(first_name=first_name, last_name=last_name)
+            messages.success(request, f'Person {person_to_add.first_name} has been added to the database.')
             return redirect(show_persons)
 
 
 class AddMovieView(TemplateView):
+    """Adds """
+
     template_name = 'addmovie.html'
     title = 'Add Movie'
 
@@ -122,6 +125,7 @@ class EditMovieView(TemplateView):
 
         stars1 = None
         stars2 = None
+
         if stars:
             stars1 = stars[0]
         if len(stars) > 1:
@@ -138,8 +142,8 @@ class EditMovieView(TemplateView):
                     'hidden': 0,
                     }
         form = EditMovieForm(initial=pre_data)
-        args = {'title': self.title, 'form': form}
-        return render(request, self.template_name, args)
+        context = {'title': self.title, 'form': form}
+        return render(request, self.template_name, context)
 
     def post(self, request, pk):
         form = EditMovieForm(request.POST or None)
@@ -155,7 +159,7 @@ class EditMovieView(TemplateView):
 
             Movie.objects.filter(id=pk).update(title=title, director=director, screenplay=screenplay,
                                                year=year, rating=rating)
-            print(genre)
+
             movie_to_edit = Movie.objects.get(id=pk)
             movie_to_edit.starring.set([starring, starring2])
             movie_to_edit.genres.set([genre, ])
@@ -170,7 +174,8 @@ class DeletePerson(TemplateView):
     def get(self, request, pk):
         object_to_delate = Person.objects.get(id=pk)
         object_to_delate.delete()
-        messages.success(request, f'Person {object_to_delate.first_name} {object_to_delate.last_name} has been deleted.')
+        messages.success(request,
+                         f'Person {object_to_delate.first_name} {object_to_delate.last_name} has been deleted.')
         return redirect(show_persons)
 
 
