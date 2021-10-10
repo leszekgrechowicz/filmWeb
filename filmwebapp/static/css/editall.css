@@ -1,15 +1,16 @@
 .form {
     margin: auto;
-    max-width: 700px;
+    max-width: 800px;
 }
 
 .main-form {
     display: flex;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .person-data {
     font-size: 1.1em;
+    width: 45%;
 }
 
 
@@ -27,9 +28,13 @@
 }
 
 .mar-top {
-    margin-top: 45px;
+    margin-top: 50px;
 }
 
 .errorlist {
     display: none;
+}
+
+.form-div {
+    width: 45%;
 }

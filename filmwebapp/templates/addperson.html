@@ -11,19 +11,19 @@
 {% block content %}
 <div class="mar-top form">
     <div class="main-form">
-        <div class="person-data">
-            <p class="">To add person please provide name and surname</p>
+            <div class="person-data">
+                <p class="">To add person please provide:</p>
 
-        </div>
-    <div class="form">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
+            </div>
+            <div class="form-div">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-            <input class="input-bttn btn btn-outline-info" type="submit" value="Confirm">
+                    <input class="input-bttn btn btn-outline-info" type="submit" value="Confirm">
 
-        </form>
-    </div>
+                </form>
+            </div>
         </div>
 </div>
 

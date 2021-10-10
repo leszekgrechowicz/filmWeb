@@ -12,6 +12,19 @@ Python Installation is required !
 - Install requirements.txt using pip.
 - Install PostgreSQL DataBase using pip `pip install psycopg2-binary`
 - Run script create_db_postgre.py to crate `imdb` database under PostgreSQL
+  - Go to the file located in filmWeb/settings.py and set your user_name and password to the database, 
+  replacing DATABASE position with the code below.
+   ```
+    DATABASES = {
+      'default': {
+          'HOST': 'localhost',
+          'NAME': '<db_name>',
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'USER': '<user_name>',
+          'PASSWORD': '<db_password>',
+      }
+    }
+
 - Run Django command `python3 manage.py makemigrations ` to make/prepare migrations
 - Run Django command `python3 manage.py migrate ` to implement migrations
 - Run Django command `python3 manage.py loaddata initial_data ` to load initial database data

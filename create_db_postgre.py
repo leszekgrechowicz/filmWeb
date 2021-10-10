@@ -1,19 +1,13 @@
 from psycopg2 import connect, OperationalError
+import re
 
 db_name = "imdb"
-sql = f"CREATE DATABASE {db_name};"
-
-db_created = False
 
 db_choice = input("\nWelcome in film_Web DataBase creator !\n"
-                  "\nPlease confirm what Data Base is installed on your machine.\n"
-                  "Please choice from the following: \n\n"
-                  "\t1 - PostgreSQL\n"
-                  "\t2 - SQLite\n"
-                  "\t2 - MySQL\n"
                   "\n>>> ")
 
-while not db_created:
+connected = False
+while not connected:
 
     user = input("Please provide Data-Base user name: ")
     password = input("Password: ")
@@ -21,11 +15,24 @@ while not db_created:
     try:
         cnx = connect(user=f"{user}", password=f"{password}", host="localhost")
         cnx.autocommit = True
+        connected = True
+
+    except OperationalError as error:
+        print(f"Error ! --> {error} ")
+
+
+db_created = False
+while not db_created:
+
+    print("You are successfully connected to the database")
+
+    sql = f"CREATE DATABASE {db_name};"
+
+    try:
         cursor = cnx.cursor()
         cursor.execute(sql)
         print(f"Database {db_name} has been created.")
         db_created = True
-
 
     except OperationalError as error:
         print(f"Error ! --> {error} ")
