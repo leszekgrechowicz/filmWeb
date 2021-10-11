@@ -14,6 +14,8 @@ Python Installation is required !
 - Run script create_db_postgre.py to crate `imdb` database under PostgreSQL
   - Go to the file located in filmWeb/settings.py and set your user_name and password to the database, 
   replacing DATABASE position with the code below.
+  
+  -----
    ```
     DATABASES = {
       'default': {
