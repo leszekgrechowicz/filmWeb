@@ -2,6 +2,7 @@
 Simple web service with DataBase using Django
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/leszekgrechowicz/filmWeb)
+----
 ![](film_web.png) 
 
 ## Preparation:
