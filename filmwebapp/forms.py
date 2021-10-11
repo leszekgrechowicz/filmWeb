@@ -27,28 +27,25 @@ class MovieForm(forms.Form):
     title = forms.CharField(widget=forms.TextInput(
         attrs=ATTRS))
 
-    director = forms.ModelChoiceField(queryset=Person.objects.all(), widget=forms.Select(
-        attrs=ATTRS))
+    director = forms.ModelChoiceField(queryset=Person.objects.all(),
+                                      widget=forms.Select(attrs=ATTRS))
 
-    screenplay = forms.ModelChoiceField(queryset=Person.objects.all(), widget=forms.Select(
-        attrs=ATTRS))
+    screenplay = forms.ModelChoiceField(queryset=Person.objects.all(),
+                                        widget=forms.Select(attrs=ATTRS))
 
-    starring = forms.ModelChoiceField(queryset=Person.objects.all(), widget=forms.Select(
-        attrs=ATTRS))
+    starring = forms.ModelChoiceField(queryset=Person.objects.all(),
+                                      widget=forms.Select(attrs=ATTRS))
 
-    starring2 = forms.ModelChoiceField(queryset=Person.objects.all(), widget=forms.Select(
-        attrs=ATTRS))
+    starring2 = forms.ModelChoiceField(queryset=Person.objects.all(),
+                                       widget=forms.Select(attrs=ATTRS))
 
-    # starring3 = forms.ModelChoiceField(queryset=Person.objects.all())
+    production_year = forms.IntegerField(min_value=1600, max_value=todays_date.year,
+                                         widget=forms.NumberInput(attrs=ATTRS))
 
-    production_year = forms.IntegerField(min_value=1600, max_value=todays_date.year, widget=forms.NumberInput(
-        attrs=ATTRS))
+    rating = forms.DecimalField(max_digits=3, decimal_places=1, min_value=1, max_value=10,
+                                widget=forms.NumberInput(attrs=ATTRS))
 
-    rating = forms.DecimalField(max_digits=2, decimal_places=1, min_value=1.0, max_value=10.0, widget=forms.NumberInput(
-        attrs=ATTRS))
-
-    genre = forms.ChoiceField(choices=Genre.GENRE_CHOICES, widget=forms.Select(
-        attrs=ATTRS))
+    genre = forms.ChoiceField(choices=Genre.GENRE_CHOICES, widget=forms.Select(attrs=ATTRS))
 
     def clean_title(self, *args, **kwargs):
         title = self.cleaned_data.get("title")
@@ -89,7 +86,7 @@ class EditMovieForm(forms.Form):
     production_year = forms.IntegerField(min_value=1600, max_value=todays_date.year, widget=forms.NumberInput(
         attrs=ATTRS))
 
-    rating = forms.DecimalField(max_digits=2, decimal_places=1, min_value=1.0, max_value=10.0, widget=forms.NumberInput(
+    rating = forms.DecimalField(max_digits=3, decimal_places=1, min_value=1, max_value=10, widget=forms.NumberInput(
         attrs=ATTRS))
 
     genre = forms.ChoiceField(choices=Genre.GENRE_CHOICES, widget=forms.Select(

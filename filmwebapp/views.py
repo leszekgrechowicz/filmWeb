@@ -1,12 +1,9 @@
 from django.shortcuts import render
 from filmwebapp.models import Movie, Person, Genre
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from filmwebapp.forms import EditForm, MovieForm, EditMovieForm
 from django.contrib import messages
 from django.shortcuts import redirect
-
-
-# Create your views here.
 
 
 def show_movies(request):
@@ -36,16 +33,16 @@ def show_persons(request):
     return render(request, 'persons.html', {'title': title, 'persons': persons})
 
 
-class EditPersonView(TemplateView):
+class EditPersonView(FormView):
     """Edits person details"""
-    # template_name = 'editperson.html'
+    template_name = 'editperson.html'
     title = 'Edit Person'
 
     def get(self, request, pk):
         person_to_edit = Person.objects.get(id=pk)
         form = EditForm()
         args = {'title': self.title, 'person': person_to_edit, 'form': form}
-        return render(request, 'editperson.html', args)
+        return render(request, self.template_name, args)
 
     def post(self, request, pk):
         form = EditForm(request.POST)
@@ -60,7 +57,7 @@ class EditPersonView(TemplateView):
             return redirect(show_persons)
 
 
-class AddPersonView(TemplateView):
+class AddPersonView(FormView):
     """Adds person to the database"""
     template_name = 'addperson.html'
     title = 'Add Person'
@@ -93,38 +90,30 @@ class AddMovieView(TemplateView):
     def post(self, request):
         form = MovieForm(request.POST or None)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            director = form.cleaned_data['director']
-            screenplay = form.cleaned_data['screenplay']
-            starring = form.cleaned_data['starring']
-            starring2 = form.cleaned_data['starring2']
-            year = form.cleaned_data['production_year']
-            rating = form.cleaned_data['rating']
-            genre = form.cleaned_data['genre']
+            new_movie = Movie.objects.create(title=form.cleaned_data['title'],
+                                             director=form.cleaned_data['director'],
+                                             screenplay=form.cleaned_data['screenplay'],
+                                             year=form.cleaned_data['production_year'],
+                                             rating=form.cleaned_data['rating'])
 
-            genre = Genre.objects.get(name=int(genre))
-
-            new_movie = Movie.objects.create(title=title, director=director, screenplay=screenplay,
-                                             year=year, rating=rating)
-            new_movie.starring.set([starring, starring2])
-            new_movie.genres.set([genre, ])
+            new_movie.starring.set([form.cleaned_data['starring'], form.cleaned_data['starring2']])
+            new_movie.genres.set([Genre.objects.get(name=int(form.cleaned_data['genre'])), ])
             return redirect(show_movies)
 
         else:
             return render(request, 'addmovie.html', {'title': self.title, 'form': form})
 
 
-class EditMovieView(TemplateView):
+class EditMovieView(FormView):
     template_name = 'editmovie.html'
     title = 'Edit Movie'
 
     def get(self, request, pk):
         movie = Movie.objects.get(id=pk)
-        stars = list(movie.starring.all())
-        genre = list(movie.genres.all())
+        stars = movie.starring.all()
+        genre = movie.genres.all()
 
-        stars1 = None
-        stars2 = None
+        stars1, stars2 = None, None
 
         if stars:
             stars1 = stars[0]
@@ -148,41 +137,35 @@ class EditMovieView(TemplateView):
     def post(self, request, pk):
         form = EditMovieForm(request.POST or None)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            director = form.cleaned_data['director']
-            screenplay = form.cleaned_data['screenplay']
-            starring = form.cleaned_data['starring']
-            starring2 = form.cleaned_data['starring2']
-            year = form.cleaned_data['production_year']
-            rating = form.cleaned_data['rating']
-            genre = form.cleaned_data['genre']
-
-            Movie.objects.filter(id=pk).update(title=title, director=director, screenplay=screenplay,
-                                               year=year, rating=rating)
+            Movie.objects.filter(id=pk).update(title=form.cleaned_data['title'],
+                                               director=form.cleaned_data['director'],
+                                               screenplay=form.cleaned_data['screenplay'],
+                                               year=form.cleaned_data['production_year'],
+                                               rating=form.cleaned_data['rating'])
 
             movie_to_edit = Movie.objects.get(id=pk)
-            movie_to_edit.starring.set([starring, starring2])
-            movie_to_edit.genres.set([genre, ])
+            movie_to_edit.starring.set([form.cleaned_data['starring'], form.cleaned_data['starring2']])
+            movie_to_edit.genres.set([form.cleaned_data['genre'], ])
             return redirect(show_movies)
 
         else:
-            return render(request, 'editmovie.html', {'title': self.title, 'form': form})
+            return render(request, self.template_name, {'title': self.title, 'form': form})
 
 
 class DeletePerson(TemplateView):
 
     def get(self, request, pk):
-        object_to_delate = Person.objects.get(id=pk)
-        object_to_delate.delete()
+        object_to_delete = Person.objects.get(id=pk)
+        object_to_delete.delete()
         messages.success(request,
-                         f'Person {object_to_delate.first_name} {object_to_delate.last_name} has been deleted.')
+                         f'Person {object_to_delete.first_name} {object_to_delete.last_name} has been deleted.')
         return redirect(show_persons)
 
 
 class DeleteMovie(TemplateView):
 
     def get(self, request, pk):
-        object_to_delate = Movie.objects.get(id=pk)
-        object_to_delate.delete()
-        messages.success(request, f'Movie {object_to_delate.title} has been deleted.')
+        object_to_delete = Movie.objects.get(id=pk)
+        object_to_delete.delete()
+        messages.success(request, f'Movie {object_to_delete.title} has been deleted.')
         return redirect(show_movies)

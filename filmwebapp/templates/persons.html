@@ -10,15 +10,6 @@
 
 {% block content %}
 
-{% if messages %}
-<div class="alert alert-success ">
-    {% for message in messages %}
-    <p>{{ message }}</p><br>
-    {% endfor %}
-
-</div>
-{% endif %}
-
 {% if persons %}
 <table class="table_person">
     <thead>

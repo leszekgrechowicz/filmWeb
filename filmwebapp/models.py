@@ -35,14 +35,13 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
-    MIN = 1.0
-    MAX = 10.0
+
     title = models.CharField(max_length=128, unique=True)
     director = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="director+")
     screenplay = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="screenplay+")
     starring = models.ManyToManyField(Person, through="PersonMovie")
     year = models.IntegerField()
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    rating = models.DecimalField(max_digits=3, decimal_places=1)
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):
