@@ -8,6 +8,10 @@ body {
 
 }
 
+.main {
+    margin-top: 35px;
+}
+
 .link_div {
     align-content: center;
     margin-left: 80px;
